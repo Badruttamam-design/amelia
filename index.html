@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="icon.png">
+  <title>I Love You ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Quicksand:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Intro Envelope Screen -->
+  <div id="introScreen" class="intro-screen">
+    <div class="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="top-flap"></div>
+        <div class="paper-letter">
+          <div class="text">Untuk Amelia</div>
+          <div class="heart-stamp">❤️</div>
+        </div>
+        <div class="front"></div>
+        <div class="bottom-flap"></div>
+      </div>
+      <div class="tap-text">Buka Amplopnya Sayang</div>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" src="sound/bgm.mp3" loop></audio>
+
+  <!-- Canvas for particle aurora background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Glow orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Main card -->
+  <div class="scene">
+    <div class="card" id="mainCard">
+      <!-- Photo Slideshow Background -->
+      <div class="card-slideshow" id="cardSlideshow">
+        <!-- Foto akan digenerate otomatis oleh JavaScript -->
+      </div>
+
+      <!-- Shimmer border effect -->
+      <div class="card-border-glow"></div>
+
+      <!-- Inner content -->
+      <div class="card-inner">
+        <div class="text-container" id="textContainer">
+          <span class="letter" data-letter="I">I</span>
+          <span class="letter" data-letter="L">L</span>
+          <span class="letter" data-letter="O">O</span>
+          <span class="letter" data-letter="V">V</span>
+          <span class="letter" data-letter="E">E</span>
+          <span class="letter" data-letter="Y">Y</span>
+          <span class="letter" data-letter="O2">O</span>
+          <span class="letter" data-letter="U">U</span>
+        </div>
+
+        <div class="subtitle-slot" id="subtitleSlot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating emojis layer -->
+  <div id="floatLayer"></div>
+
+  <!-- Message overlay -->
+  <div class="final-message" id="finalMessage"></div>
+
+  <!-- SVG Goo / Liquid Filter — invisible, just filter definitions -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden;">
+    <defs>
+      <!-- Goo effect: blur + high-contrast threshold = liquid blob look -->
+      <filter id="goo" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 22 -9" result="goo" />
+        <feBlend in="SourceGraphic" in2="goo" />
+      </filter>
+
+      <!-- Drip filter: vertical stretch + turbulence for dripping in -->
+      <filter id="drip" x="-20%" y="-40%" width="140%" height="200%">
+        <feTurbulence type="turbulence" baseFrequency="0.02 0.05" numOctaves="2" seed="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"
+          result="warped" />
+        <feGaussianBlur in="warped" stdDeviation="1.5" result="soft" />
+        <feColorMatrix in="soft" mode="matrix" values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 28 -11" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Birthday Countdowns -->
+  <div class="countdown-container">
+    <div class="countdown-box">
+      <div class="countdown-title">Tamam Birthday</div>
+      <div class="countdown-date">25 April</div>
+      <div class="countdown-timer" id="timerTamam">00 hari 00 jam 00 menit 00 detik</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-title">Amelia Birthday</div>
+      <div class="countdown-date">13 Mei</div>
+      <div class="countdown-timer" id="timerAmelia">00 hari 00 jam 00 menit 00 detik</div>
+    </div>
+  </div>
+
+  <script src="script.js?v=8"></script>
+</body>
+
+</html>
