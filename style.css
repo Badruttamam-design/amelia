@@ -44,7 +44,6 @@ body {
 .orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(80px);
   pointer-events: none;
   z-index: 1;
   animation: orbFloat 10s ease-in-out infinite;
@@ -120,10 +119,10 @@ body {
       rgba(255, 255, 255, 0.07) 0%,
       rgba(255, 255, 255, 0.02) 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 20px 50px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(255, 255, 255, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
     inset 0 -1px 0 rgba(0, 0, 0, 0.3);
@@ -149,27 +148,21 @@ body {
   position: absolute;
   inset: -2px;
   border-radius: 34px;
-  background: conic-gradient(from var(--angle, 0deg),
-      #ff1493, #ff6b6b, #ffd700, #00ff88, #00d4ff, #a855f7, #ff1493);
+  background: linear-gradient(135deg, #ff1493, #ff6b6b, #ffd700, #00ff88, #00d4ff, #a855f7, #ff1493);
+  background-size: 300% 300%;
   z-index: -1;
-  animation: spinBorder 5s linear infinite;
+  animation: spinBorder 8s ease infinite;
   opacity: 0.7;
+  padding: 2px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
 }
 
 @keyframes spinBorder {
-  to {
-    --angle: 360deg;
-  }
-}
-
-/* Polyfill: Chrome doesn't animate custom properties in @keyframes for conic-gradient
-   so we use a wrapper rotation instead */
-.card-border-glow::after {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border-radius: 32px;
-  background: #020010;
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .card-slideshow {
@@ -245,14 +238,12 @@ body {
   color: transparent;
   background-size: 200% 200%;
   animation: letterGradShift 5s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px rgba(255, 100, 200, 0.5)) drop-shadow(0 0 24px rgba(168, 85, 247, 0.3));
   will-change: transform, opacity;
   cursor: default;
   user-select: none;
 }
 
 .letter:hover {
-  filter: drop-shadow(0 0 20px rgba(255, 50, 180, 0.9)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 60px rgba(100, 200, 255, 0.4));
   transform: scale(1.25) translateY(-8px) !important;
   transition: all 0.2s ease !important;
 }
@@ -473,7 +464,6 @@ body {
   pointer-events: none;
   z-index: 10;
   background: radial-gradient(circle, #fff 0%, var(--color) 60%, transparent 100%);
-  box-shadow: 0 0 12px var(--color), 0 0 24px var(--color);
   animation: particleBurst 1.6s ease-out forwards;
 }
 
@@ -528,7 +518,6 @@ body {
   pointer-events: none;
   z-index: 5;
   background: var(--color);
-  box-shadow: 0 0 8px var(--color);
   animation: fireworkExplode 1.1s ease-out forwards;
 }
 
@@ -794,8 +783,7 @@ body {
 /* When active, the goo SVG filter turns nearby letter edges
    into a liquid blob that merges together */
 .text-container.goo-mode {
-  filter: url(#goo);
-  /* Isolate the filter so only children are affected */
+  /* Removed url(#goo) to fix lag */
   isolation: isolate;
 }
 
@@ -835,25 +823,24 @@ body {
 .amelia-letter.drip-in {
   animation: dripIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
   transform-origin: center top;
-  filter: url(#drip);
 }
 
 @keyframes dripIn {
   0% {
     transform: translateY(-80px) scaleY(2.4) scaleX(0.5);
     opacity: 0;
-    filter: url(#drip) blur(6px);
+    filter: blur(4px);
   }
 
   35% {
     opacity: 1;
-    filter: url(#drip) blur(2px);
+    filter: blur(2px);
     transform: translateY(12px) scaleY(0.7) scaleX(1.2);
   }
 
   60% {
     transform: translateY(-6px) scaleY(1.15) scaleX(0.92);
-    filter: url(#drip) blur(0px);
+    filter: blur(0px);
   }
 
   80% {
@@ -875,8 +862,6 @@ body {
   pointer-events: none;
   z-index: 15;
   background: var(--color);
-  box-shadow: 0 0 12px var(--color), 0 0 24px var(--color);
-  filter: url(#goo);
   animation: dropFall var(--dur) cubic-bezier(0.4, 0, 0.8, 1) forwards;
 }
 
@@ -928,7 +913,6 @@ body {
   z-index: 9998;
   transform: translate(-50%, -50%) scale(1);
   background: var(--trail-color);
-  box-shadow: 0 0 8px var(--trail-color), 0 0 16px var(--trail-color);
   animation: trailFade var(--trail-dur, 0.6s) ease-out forwards;
 }
 

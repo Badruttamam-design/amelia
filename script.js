@@ -601,7 +601,7 @@ function animate() {
 
     // Only spawn trail if mouse moved enough (avoid spam on tiny jitter)
     const dx = x - lastX, dy = y - lastY;
-    if (dx * dx + dy * dy < 16) return; // < 4px movement
+    if (dx * dx + dy * dy < 256) return; // < 16px movement
     lastX = x; lastY = y;
     dotCount++;
 
@@ -610,7 +610,7 @@ function animate() {
     dot.className = "trail-dot";
     const trailColor = `hsl(${hue}, 100%, 65%)`;
     const size = 6 + Math.random() * 7;
-    const dur = 0.4 + Math.random() * 0.35;
+    const dur = 0.2 + Math.random() * 0.15; // Lebih cepat hilang agar tidak menumpuk di DOM
     dot.style.cssText = `
       left: ${x}px;
       top:  ${y}px;
@@ -622,12 +622,12 @@ function animate() {
     document.body.appendChild(dot);
     setTimeout(() => dot.remove(), dur * 1000 + 50);
 
-    // ── Emoji star (every ~6 dots) ──
-    if (dotCount % 6 === 0) {
+    // ── Emoji star (every ~4 dots) ──
+    if (dotCount % 4 === 0) {
       const star = document.createElement("div");
       star.className = "trail-star";
       star.textContent = STARS_EMOJI[Math.floor(Math.random() * STARS_EMOJI.length)];
-      const starDur = 0.7 + Math.random() * 0.5;
+      const starDur = 0.4 + Math.random() * 0.3; // Lebih cepat hilang
       const starSize = 12 + Math.random() * 10;
       star.style.left = x + (Math.random() - 0.5) * 20 + "px";
       star.style.top = y + (Math.random() - 0.5) * 20 + "px";

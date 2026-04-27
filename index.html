@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="icon.png">
-  <title>I Love You ❤️</title>
+  <title>Sang Rembulan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -23,6 +23,7 @@
         <div class="paper-letter">
           <div class="text">Untuk Amelia</div>
           <div class="heart-stamp">❤️</div>
+          <div class="text">Sayangku</div>
         </div>
         <div class="front"></div>
         <div class="bottom-flap"></div>
@@ -77,33 +78,6 @@
   <!-- Message overlay -->
   <div class="final-message" id="finalMessage"></div>
 
-  <!-- SVG Goo / Liquid Filter — invisible, just filter definitions -->
-  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden;">
-    <defs>
-      <!-- Goo effect: blur + high-contrast threshold = liquid blob look -->
-      <filter id="goo" x="-30%" y="-30%" width="160%" height="160%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0
-                  0 1 0 0 0
-                  0 0 1 0 0
-                  0 0 0 22 -9" result="goo" />
-        <feBlend in="SourceGraphic" in2="goo" />
-      </filter>
-
-      <!-- Drip filter: vertical stretch + turbulence for dripping in -->
-      <filter id="drip" x="-20%" y="-40%" width="140%" height="200%">
-        <feTurbulence type="turbulence" baseFrequency="0.02 0.05" numOctaves="2" seed="3" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"
-          result="warped" />
-        <feGaussianBlur in="warped" stdDeviation="1.5" result="soft" />
-        <feColorMatrix in="soft" mode="matrix" values="1 0 0 0 0
-                  0 1 0 0 0
-                  0 0 1 0 0
-                  0 0 0 28 -11" />
-      </filter>
-    </defs>
-  </svg>
-
   <!-- Birthday Countdowns -->
   <div class="countdown-container">
     <div class="countdown-box">
@@ -112,7 +86,7 @@
       <div class="countdown-timer" id="timerTamam">00 hari 00 jam 00 menit 00 detik</div>
     </div>
     <div class="countdown-box">
-      <div class="countdown-title">Amelia Birthday</div>
+      <div class="countdown-title">Amell Birthday</div>
       <div class="countdown-date">13 Mei</div>
       <div class="countdown-timer" id="timerAmelia">00 hari 00 jam 00 menit 00 detik</div>
     </div>
